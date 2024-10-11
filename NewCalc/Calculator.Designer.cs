@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calculator));
             txtDisplay = new TextBox();
             btn1 = new Button();
             btnplus = new Button();
@@ -47,27 +48,33 @@
             btn4 = new Button();
             btn3 = new Button();
             btn2 = new Button();
+            txtPreview = new TextBox();
+            btnneg = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // txtDisplay
             // 
-            txtDisplay.BackColor = SystemColors.InfoText;
+            txtDisplay.BackColor = Color.MistyRose;
+            txtDisplay.BorderStyle = BorderStyle.None;
+            txtDisplay.Enabled = false;
             txtDisplay.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtDisplay.ForeColor = SystemColors.Window;
-            txtDisplay.Location = new Point(12, 40);
+            txtDisplay.ForeColor = Color.DimGray;
+            txtDisplay.Location = new Point(28, 53);
             txtDisplay.Name = "txtDisplay";
+            txtDisplay.PlaceholderText = "0";
             txtDisplay.ReadOnly = true;
-            txtDisplay.Size = new Size(315, 50);
+            txtDisplay.Size = new Size(283, 43);
             txtDisplay.TabIndex = 0;
             txtDisplay.Text = "0";
             txtDisplay.TextAlign = HorizontalAlignment.Right;
             // 
             // btn1
             // 
-            btn1.BackColor = SystemColors.Desktop;
+            btn1.BackColor = Color.MistyRose;
             btn1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn1.ForeColor = SystemColors.ButtonHighlight;
-            btn1.Location = new Point(22, 236);
+            btn1.ForeColor = Color.DimGray;
+            btn1.Location = new Point(34, 235);
             btn1.Name = "btn1";
             btn1.Size = new Size(51, 49);
             btn1.TabIndex = 7;
@@ -77,12 +84,15 @@
             // 
             // btnplus
             // 
-            btnplus.BackColor = SystemColors.Desktop;
-            btnplus.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btnplus.ForeColor = SystemColors.ButtonHighlight;
-            btnplus.Location = new Point(198, 295);
+            btnplus.BackColor = Color.DarkKhaki;
+            btnplus.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
+            btnplus.FlatAppearance.BorderSize = 0;
+            btnplus.FlatStyle = FlatStyle.Flat;
+            btnplus.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            btnplus.ForeColor = SystemColors.ControlDarkDark;
+            btnplus.Location = new Point(205, 290);
             btnplus.Name = "btnplus";
-            btnplus.Size = new Size(57, 53);
+            btnplus.Size = new Size(49, 49);
             btnplus.TabIndex = 8;
             btnplus.Text = "+";
             btnplus.UseVisualStyleBackColor = false;
@@ -90,12 +100,15 @@
             // 
             // btnminus
             // 
-            btnminus.BackColor = SystemColors.Desktop;
-            btnminus.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btnminus.ForeColor = SystemColors.ButtonHighlight;
-            btnminus.Location = new Point(198, 236);
+            btnminus.BackColor = Color.DarkKhaki;
+            btnminus.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
+            btnminus.FlatAppearance.BorderSize = 0;
+            btnminus.FlatStyle = FlatStyle.Flat;
+            btnminus.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            btnminus.ForeColor = SystemColors.ControlDarkDark;
+            btnminus.Location = new Point(205, 235);
             btnminus.Name = "btnminus";
-            btnminus.Size = new Size(57, 53);
+            btnminus.Size = new Size(49, 49);
             btnminus.TabIndex = 9;
             btnminus.Text = "-";
             btnminus.UseVisualStyleBackColor = false;
@@ -103,51 +116,63 @@
             // 
             // btnequals
             // 
-            btnequals.BackColor = SystemColors.Desktop;
-            btnequals.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btnequals.ForeColor = SystemColors.ButtonHighlight;
-            btnequals.Location = new Point(261, 236);
+            btnequals.BackColor = Color.DarkKhaki;
+            btnequals.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
+            btnequals.FlatAppearance.BorderSize = 0;
+            btnequals.FlatStyle = FlatStyle.Flat;
+            btnequals.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            btnequals.ForeColor = SystemColors.ControlDarkDark;
+            btnequals.Location = new Point(260, 235);
             btnequals.Name = "btnequals";
-            btnequals.Size = new Size(57, 112);
+            btnequals.Size = new Size(49, 104);
             btnequals.TabIndex = 12;
             btnequals.Text = "=";
             btnequals.UseVisualStyleBackColor = false;
-            btnequals.Click += btnequals_Click_1;
+            btnequals.Click += btnequals_Click;
             // 
             // btndivide
             // 
-            btndivide.BackColor = SystemColors.Desktop;
-            btndivide.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btndivide.ForeColor = SystemColors.ButtonHighlight;
-            btndivide.Location = new Point(198, 118);
+            btndivide.BackColor = Color.DarkKhaki;
+            btndivide.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
+            btndivide.FlatAppearance.BorderSize = 0;
+            btndivide.FlatStyle = FlatStyle.Flat;
+            btndivide.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            btndivide.ForeColor = SystemColors.ControlDarkDark;
+            btndivide.Location = new Point(260, 180);
             btndivide.Name = "btndivide";
-            btndivide.Size = new Size(57, 53);
+            btndivide.Size = new Size(49, 49);
             btndivide.TabIndex = 11;
-            btndivide.Text = "/";
+            btndivide.Text = "÷";
             btndivide.UseVisualStyleBackColor = false;
             btndivide.Click += btnOprtr_Click;
             // 
             // btnmultiply
             // 
-            btnmultiply.BackColor = SystemColors.Desktop;
-            btnmultiply.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btnmultiply.ForeColor = SystemColors.ButtonHighlight;
-            btnmultiply.Location = new Point(198, 177);
+            btnmultiply.BackColor = Color.DarkKhaki;
+            btnmultiply.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
+            btnmultiply.FlatAppearance.BorderSize = 0;
+            btnmultiply.FlatStyle = FlatStyle.Flat;
+            btnmultiply.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            btnmultiply.ForeColor = SystemColors.ControlDarkDark;
+            btnmultiply.Location = new Point(205, 180);
             btnmultiply.Name = "btnmultiply";
-            btnmultiply.Size = new Size(57, 53);
+            btnmultiply.Size = new Size(49, 49);
             btnmultiply.TabIndex = 10;
-            btnmultiply.Text = "*";
+            btnmultiply.Text = "×";
             btnmultiply.UseVisualStyleBackColor = false;
             btnmultiply.Click += btnOprtr_Click;
             // 
             // btndelete
             // 
-            btndelete.BackColor = SystemColors.Desktop;
+            btndelete.BackColor = Color.Khaki;
+            btndelete.FlatAppearance.BorderColor = Color.BurlyWood;
+            btndelete.FlatAppearance.BorderSize = 2;
+            btndelete.FlatStyle = FlatStyle.Flat;
             btndelete.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btndelete.ForeColor = SystemColors.ButtonHighlight;
-            btndelete.Location = new Point(261, 118);
+            btndelete.ForeColor = Color.DimGray;
+            btndelete.Location = new Point(260, 125);
             btndelete.Name = "btndelete";
-            btndelete.Size = new Size(57, 53);
+            btndelete.Size = new Size(49, 49);
             btndelete.TabIndex = 30;
             btndelete.Text = "DEL";
             btndelete.UseVisualStyleBackColor = false;
@@ -155,25 +180,28 @@
             // 
             // btnclear
             // 
-            btnclear.BackColor = SystemColors.Desktop;
+            btnclear.BackColor = Color.Khaki;
+            btnclear.FlatAppearance.BorderColor = Color.BurlyWood;
+            btnclear.FlatAppearance.BorderSize = 2;
+            btnclear.FlatStyle = FlatStyle.Flat;
             btnclear.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btnclear.ForeColor = SystemColors.ButtonHighlight;
-            btnclear.Location = new Point(261, 177);
+            btnclear.ForeColor = Color.DimGray;
+            btnclear.Location = new Point(205, 125);
             btnclear.Name = "btnclear";
-            btnclear.Size = new Size(57, 53);
+            btnclear.Size = new Size(49, 49);
             btnclear.TabIndex = 29;
             btnclear.Text = "C";
             btnclear.UseVisualStyleBackColor = false;
-            btnclear.Click += btnclear_Click;
+            btnclear.Click += btnclear_Click_1;
             // 
             // btn0
             // 
-            btn0.BackColor = SystemColors.Desktop;
+            btn0.BackColor = Color.MistyRose;
             btn0.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn0.ForeColor = SystemColors.ButtonHighlight;
-            btn0.Location = new Point(22, 291);
+            btn0.ForeColor = Color.DimGray;
+            btn0.Location = new Point(91, 290);
             btn0.Name = "btn0";
-            btn0.Size = new Size(108, 49);
+            btn0.Size = new Size(51, 49);
             btn0.TabIndex = 28;
             btn0.Text = "0";
             btn0.UseVisualStyleBackColor = false;
@@ -181,23 +209,26 @@
             // 
             // btndot
             // 
-            btndot.BackColor = SystemColors.Desktop;
+            btndot.BackColor = Color.Khaki;
+            btndot.FlatAppearance.BorderColor = Color.BurlyWood;
+            btndot.FlatAppearance.BorderSize = 2;
+            btndot.FlatStyle = FlatStyle.Flat;
             btndot.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btndot.ForeColor = SystemColors.ButtonHighlight;
-            btndot.Location = new Point(136, 291);
+            btndot.ForeColor = Color.DimGray;
+            btndot.Location = new Point(148, 290);
             btndot.Name = "btndot";
             btndot.Size = new Size(51, 49);
             btndot.TabIndex = 27;
             btndot.Text = ".";
             btndot.UseVisualStyleBackColor = false;
-            btndot.Click += btndot_Click_1;
+            btndot.Click += btndot_Click;
             // 
             // btn9
             // 
-            btn9.BackColor = SystemColors.Desktop;
+            btn9.BackColor = Color.MistyRose;
             btn9.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn9.ForeColor = SystemColors.ButtonHighlight;
-            btn9.Location = new Point(136, 126);
+            btn9.ForeColor = Color.DimGray;
+            btn9.Location = new Point(148, 125);
             btn9.Name = "btn9";
             btn9.Size = new Size(51, 49);
             btn9.TabIndex = 26;
@@ -207,10 +238,10 @@
             // 
             // btn8
             // 
-            btn8.BackColor = SystemColors.Desktop;
+            btn8.BackColor = Color.MistyRose;
             btn8.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn8.ForeColor = SystemColors.ButtonHighlight;
-            btn8.Location = new Point(79, 126);
+            btn8.ForeColor = Color.DimGray;
+            btn8.Location = new Point(91, 125);
             btn8.Name = "btn8";
             btn8.Size = new Size(51, 49);
             btn8.TabIndex = 25;
@@ -220,10 +251,10 @@
             // 
             // btn7
             // 
-            btn7.BackColor = SystemColors.Desktop;
+            btn7.BackColor = Color.MistyRose;
             btn7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn7.ForeColor = SystemColors.ButtonHighlight;
-            btn7.Location = new Point(22, 126);
+            btn7.ForeColor = Color.DimGray;
+            btn7.Location = new Point(34, 125);
             btn7.Name = "btn7";
             btn7.Size = new Size(51, 49);
             btn7.TabIndex = 24;
@@ -233,10 +264,10 @@
             // 
             // btn6
             // 
-            btn6.BackColor = SystemColors.Desktop;
+            btn6.BackColor = Color.MistyRose;
             btn6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn6.ForeColor = SystemColors.ButtonHighlight;
-            btn6.Location = new Point(136, 181);
+            btn6.ForeColor = Color.DimGray;
+            btn6.Location = new Point(148, 180);
             btn6.Name = "btn6";
             btn6.Size = new Size(51, 49);
             btn6.TabIndex = 23;
@@ -246,10 +277,10 @@
             // 
             // btn5
             // 
-            btn5.BackColor = SystemColors.Desktop;
+            btn5.BackColor = Color.MistyRose;
             btn5.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn5.ForeColor = SystemColors.ButtonHighlight;
-            btn5.Location = new Point(79, 181);
+            btn5.ForeColor = Color.DimGray;
+            btn5.Location = new Point(91, 180);
             btn5.Name = "btn5";
             btn5.Size = new Size(51, 49);
             btn5.TabIndex = 22;
@@ -259,10 +290,10 @@
             // 
             // btn4
             // 
-            btn4.BackColor = SystemColors.Desktop;
+            btn4.BackColor = Color.MistyRose;
             btn4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn4.ForeColor = SystemColors.ButtonHighlight;
-            btn4.Location = new Point(22, 181);
+            btn4.ForeColor = Color.DimGray;
+            btn4.Location = new Point(34, 180);
             btn4.Name = "btn4";
             btn4.Size = new Size(51, 49);
             btn4.TabIndex = 21;
@@ -272,10 +303,10 @@
             // 
             // btn3
             // 
-            btn3.BackColor = SystemColors.Desktop;
+            btn3.BackColor = Color.MistyRose;
             btn3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn3.ForeColor = SystemColors.ButtonHighlight;
-            btn3.Location = new Point(136, 236);
+            btn3.ForeColor = Color.DimGray;
+            btn3.Location = new Point(148, 235);
             btn3.Name = "btn3";
             btn3.Size = new Size(51, 49);
             btn3.TabIndex = 20;
@@ -285,10 +316,10 @@
             // 
             // btn2
             // 
-            btn2.BackColor = SystemColors.Desktop;
+            btn2.BackColor = Color.MistyRose;
             btn2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btn2.ForeColor = SystemColors.ButtonHighlight;
-            btn2.Location = new Point(79, 236);
+            btn2.ForeColor = Color.DimGray;
+            btn2.Location = new Point(91, 235);
             btn2.Name = "btn2";
             btn2.Size = new Size(51, 49);
             btn2.TabIndex = 19;
@@ -296,12 +327,51 @@
             btn2.UseVisualStyleBackColor = false;
             btn2.Click += btnNum_Click;
             // 
+            // txtPreview
+            // 
+            txtPreview.BackColor = Color.MistyRose;
+            txtPreview.BorderStyle = BorderStyle.None;
+            txtPreview.Font = new Font("Segoe UI", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            txtPreview.ForeColor = SystemColors.ControlDarkDark;
+            txtPreview.Location = new Point(28, 30);
+            txtPreview.Name = "txtPreview";
+            txtPreview.ReadOnly = true;
+            txtPreview.Size = new Size(283, 20);
+            txtPreview.TabIndex = 31;
+            txtPreview.TextAlign = HorizontalAlignment.Right;
+            // 
+            // btnneg
+            // 
+            btnneg.BackColor = Color.Khaki;
+            btnneg.FlatAppearance.BorderColor = Color.BurlyWood;
+            btnneg.FlatAppearance.BorderSize = 2;
+            btnneg.FlatStyle = FlatStyle.Flat;
+            btnneg.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            btnneg.ForeColor = Color.DimGray;
+            btnneg.Location = new Point(34, 290);
+            btnneg.Name = "btnneg";
+            btnneg.Size = new Size(51, 49);
+            btnneg.TabIndex = 32;
+            btnneg.Text = "-/+";
+            btnneg.UseVisualStyleBackColor = false;
+            btnneg.Click += btnneg_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.MistyRose;
+            panel1.Location = new Point(12, 22);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(318, 92);
+            panel1.TabIndex = 33;
+            // 
             // Calculator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(339, 364);
+            BackColor = Color.Salmon;
+            ClientSize = new Size(342, 365);
+            Controls.Add(btnneg);
+            Controls.Add(txtPreview);
             Controls.Add(btndelete);
             Controls.Add(btnclear);
             Controls.Add(btn0);
@@ -321,8 +391,12 @@
             Controls.Add(btnplus);
             Controls.Add(btn1);
             Controls.Add(txtDisplay);
+            Controls.Add(panel1);
+            ForeColor = SystemColors.ControlDark;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Calculator";
-            Text = "Form1";
+            Text = "Calculator";
+            Load += Calculator_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -348,5 +422,8 @@
         private Button btn4;
         private Button btn3;
         private Button btn2;
+        private TextBox txtPreview;
+        private Button btnneg;
+        private Panel panel1;
     }
 }
