@@ -74,7 +74,7 @@
             btn1.BackColor = Color.MistyRose;
             btn1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn1.ForeColor = Color.DimGray;
-            btn1.Location = new Point(34, 235);
+            btn1.Location = new Point(34, 238);
             btn1.Name = "btn1";
             btn1.Size = new Size(51, 49);
             btn1.TabIndex = 7;
@@ -89,8 +89,8 @@
             btnplus.FlatAppearance.BorderSize = 0;
             btnplus.FlatStyle = FlatStyle.Flat;
             btnplus.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
-            btnplus.ForeColor = SystemColors.ControlDarkDark;
-            btnplus.Location = new Point(205, 290);
+            btnplus.ForeColor = SystemColors.WindowFrame;
+            btnplus.Location = new Point(205, 293);
             btnplus.Name = "btnplus";
             btnplus.Size = new Size(49, 49);
             btnplus.TabIndex = 8;
@@ -105,8 +105,8 @@
             btnminus.FlatAppearance.BorderSize = 0;
             btnminus.FlatStyle = FlatStyle.Flat;
             btnminus.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
-            btnminus.ForeColor = SystemColors.ControlDarkDark;
-            btnminus.Location = new Point(205, 235);
+            btnminus.ForeColor = SystemColors.WindowFrame;
+            btnminus.Location = new Point(205, 238);
             btnminus.Name = "btnminus";
             btnminus.Size = new Size(49, 49);
             btnminus.TabIndex = 9;
@@ -121,8 +121,8 @@
             btnequals.FlatAppearance.BorderSize = 0;
             btnequals.FlatStyle = FlatStyle.Flat;
             btnequals.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
-            btnequals.ForeColor = SystemColors.ControlDarkDark;
-            btnequals.Location = new Point(260, 235);
+            btnequals.ForeColor = SystemColors.WindowFrame;
+            btnequals.Location = new Point(260, 238);
             btnequals.Name = "btnequals";
             btnequals.Size = new Size(49, 104);
             btnequals.TabIndex = 12;
@@ -137,8 +137,8 @@
             btndivide.FlatAppearance.BorderSize = 0;
             btndivide.FlatStyle = FlatStyle.Flat;
             btndivide.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
-            btndivide.ForeColor = SystemColors.ControlDarkDark;
-            btndivide.Location = new Point(260, 180);
+            btndivide.ForeColor = SystemColors.WindowFrame;
+            btndivide.Location = new Point(260, 183);
             btndivide.Name = "btndivide";
             btndivide.Size = new Size(49, 49);
             btndivide.TabIndex = 11;
@@ -153,8 +153,8 @@
             btnmultiply.FlatAppearance.BorderSize = 0;
             btnmultiply.FlatStyle = FlatStyle.Flat;
             btnmultiply.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
-            btnmultiply.ForeColor = SystemColors.ControlDarkDark;
-            btnmultiply.Location = new Point(205, 180);
+            btnmultiply.ForeColor = SystemColors.WindowFrame;
+            btnmultiply.Location = new Point(205, 183);
             btnmultiply.Name = "btnmultiply";
             btnmultiply.Size = new Size(49, 49);
             btnmultiply.TabIndex = 10;
@@ -170,7 +170,7 @@
             btndelete.FlatStyle = FlatStyle.Flat;
             btndelete.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btndelete.ForeColor = Color.DimGray;
-            btndelete.Location = new Point(260, 125);
+            btndelete.Location = new Point(260, 128);
             btndelete.Name = "btndelete";
             btndelete.Size = new Size(49, 49);
             btndelete.TabIndex = 30;
@@ -186,7 +186,7 @@
             btnclear.FlatStyle = FlatStyle.Flat;
             btnclear.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btnclear.ForeColor = Color.DimGray;
-            btnclear.Location = new Point(205, 125);
+            btnclear.Location = new Point(205, 128);
             btnclear.Name = "btnclear";
             btnclear.Size = new Size(49, 49);
             btnclear.TabIndex = 29;
@@ -199,7 +199,7 @@
             btn0.BackColor = Color.MistyRose;
             btn0.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn0.ForeColor = Color.DimGray;
-            btn0.Location = new Point(91, 290);
+            btn0.Location = new Point(91, 293);
             btn0.Name = "btn0";
             btn0.Size = new Size(51, 49);
             btn0.TabIndex = 28;
@@ -215,7 +215,7 @@
             btndot.FlatStyle = FlatStyle.Flat;
             btndot.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btndot.ForeColor = Color.DimGray;
-            btndot.Location = new Point(148, 290);
+            btndot.Location = new Point(148, 293);
             btndot.Name = "btndot";
             btndot.Size = new Size(51, 49);
             btndot.TabIndex = 27;
@@ -228,7 +228,7 @@
             btn9.BackColor = Color.MistyRose;
             btn9.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn9.ForeColor = Color.DimGray;
-            btn9.Location = new Point(148, 125);
+            btn9.Location = new Point(148, 128);
             btn9.Name = "btn9";
             btn9.Size = new Size(51, 49);
             btn9.TabIndex = 26;
@@ -241,7 +241,7 @@
             btn8.BackColor = Color.MistyRose;
             btn8.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn8.ForeColor = Color.DimGray;
-            btn8.Location = new Point(91, 125);
+            btn8.Location = new Point(91, 128);
             btn8.Name = "btn8";
             btn8.Size = new Size(51, 49);
             btn8.TabIndex = 25;
@@ -254,7 +254,7 @@
             btn7.BackColor = Color.MistyRose;
             btn7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn7.ForeColor = Color.DimGray;
-            btn7.Location = new Point(34, 125);
+            btn7.Location = new Point(34, 128);
             btn7.Name = "btn7";
             btn7.Size = new Size(51, 49);
             btn7.TabIndex = 24;
@@ -267,7 +267,7 @@
             btn6.BackColor = Color.MistyRose;
             btn6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn6.ForeColor = Color.DimGray;
-            btn6.Location = new Point(148, 180);
+            btn6.Location = new Point(148, 183);
             btn6.Name = "btn6";
             btn6.Size = new Size(51, 49);
             btn6.TabIndex = 23;
@@ -280,7 +280,7 @@
             btn5.BackColor = Color.MistyRose;
             btn5.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn5.ForeColor = Color.DimGray;
-            btn5.Location = new Point(91, 180);
+            btn5.Location = new Point(91, 183);
             btn5.Name = "btn5";
             btn5.Size = new Size(51, 49);
             btn5.TabIndex = 22;
@@ -293,7 +293,7 @@
             btn4.BackColor = Color.MistyRose;
             btn4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn4.ForeColor = Color.DimGray;
-            btn4.Location = new Point(34, 180);
+            btn4.Location = new Point(34, 183);
             btn4.Name = "btn4";
             btn4.Size = new Size(51, 49);
             btn4.TabIndex = 21;
@@ -306,7 +306,7 @@
             btn3.BackColor = Color.MistyRose;
             btn3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn3.ForeColor = Color.DimGray;
-            btn3.Location = new Point(148, 235);
+            btn3.Location = new Point(148, 238);
             btn3.Name = "btn3";
             btn3.Size = new Size(51, 49);
             btn3.TabIndex = 20;
@@ -319,7 +319,7 @@
             btn2.BackColor = Color.MistyRose;
             btn2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btn2.ForeColor = Color.DimGray;
-            btn2.Location = new Point(91, 235);
+            btn2.Location = new Point(91, 238);
             btn2.Name = "btn2";
             btn2.Size = new Size(51, 49);
             btn2.TabIndex = 19;
@@ -331,6 +331,7 @@
             // 
             txtPreview.BackColor = Color.MistyRose;
             txtPreview.BorderStyle = BorderStyle.None;
+            txtPreview.Enabled = false;
             txtPreview.Font = new Font("Segoe UI", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             txtPreview.ForeColor = SystemColors.ControlDarkDark;
             txtPreview.Location = new Point(28, 30);
@@ -348,7 +349,7 @@
             btnneg.FlatStyle = FlatStyle.Flat;
             btnneg.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             btnneg.ForeColor = Color.DimGray;
-            btnneg.Location = new Point(34, 290);
+            btnneg.Location = new Point(34, 293);
             btnneg.Name = "btnneg";
             btnneg.Size = new Size(51, 49);
             btnneg.TabIndex = 32;
@@ -361,7 +362,7 @@
             panel1.BackColor = Color.MistyRose;
             panel1.Location = new Point(12, 22);
             panel1.Name = "panel1";
-            panel1.Size = new Size(318, 92);
+            panel1.Size = new Size(318, 90);
             panel1.TabIndex = 33;
             // 
             // Calculator

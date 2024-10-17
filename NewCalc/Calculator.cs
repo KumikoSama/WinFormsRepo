@@ -1,9 +1,15 @@
+using System.Linq.Expressions;
+
 namespace NewCalc
+#pragma warning disable
 {
     public partial class Calculator : Form
     {
-        private string currentInput, previousInput, currentOperator;
-        private bool operatorClickedAgain = false;
+        private string currentInput = "";
+        private string previousInput = "";
+        private string currentOperator = "";
+        private double result;
+        private bool operatorClicked = false;
         private bool isResultDisplayed = false;
 
         public Calculator()
@@ -14,14 +20,12 @@ namespace NewCalc
         private void btnNum_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            txtDisplay.Clear();
             if (button != null)
             {
                 if (isResultDisplayed)
                 {
                     ClearAll();
-                    //txtDisplay.Text = "0";
-                    isResultDisplayed = false;
+                    isResultDisplayed = false; 
                 }
                 string buttonText = button.Text;
                 AppendToInput(buttonText);
@@ -39,10 +43,22 @@ namespace NewCalc
         }
 
         #region Methods
+
         private void SetOperator(string operatorSymbol)
         {
-            if (operatorClickedAgain)
+            if (!string.IsNullOrEmpty(previousInput) && !string.IsNullOrEmpty(currentInput) && !string.IsNullOrEmpty(currentOperator))
             {
+                AutoComp();
+                currentOperator = operatorSymbol;
+                txtPreview.Text = previousInput + currentOperator;
+            }
+            else if (operatorClicked)
+            {
+                if (double.TryParse(previousInput, out double number))
+                {
+                    previousInput = string.Format("{0:N0}", number);
+                }
+
                 currentOperator = operatorSymbol;
                 txtPreview.Text = previousInput + currentOperator;
             }
@@ -51,43 +67,57 @@ namespace NewCalc
                 previousInput = currentInput;
                 currentOperator = operatorSymbol;
                 currentInput = "";
-                txtPreview.Text = previousInput + currentOperator;
                 txtDisplay.Clear();
                 txtDisplay.Text = "0";
+
+                if (double.TryParse(previousInput, out double number))
+                {
+                    if (previousInput.Contains("."))
+                    {
+                        previousInput = string.Format("{0:N}", number);
+                    }
+                    else
+                    {
+                        previousInput = string.Format("{0:N0}", number);
+                    }
+                }
+                txtPreview.Text = previousInput + currentOperator;
             }
 
-            operatorClickedAgain = true;
+            operatorClicked = true;
         }
 
         private void AppendToInput(string value)
         {
-            if (operatorClickedAgain)
+            if (operatorClicked)
             {
                 currentInput = value;
-                operatorClickedAgain = false;
+                operatorClicked = false;
             }
             else
             {
                 currentInput += value;
             }
 
-            txtDisplay.Text = currentInput;
+            FormatAndDisplayInput();
         }
+
         private void ClearAll()
         {
             currentInput = "";
             previousInput = "";
             currentOperator = "";
+            result = 0;
+            operatorClicked = false;
+            isResultDisplayed = false;
             txtDisplay.Clear();
             txtPreview.Clear();
         }
-        #endregion
 
-        private void btnequals_Click(object sender, EventArgs e)
+        private void AutoComp()
         {
             try
             {
-                double result = 0;
                 double num1 = double.Parse(previousInput);
                 double num2 = double.Parse(currentInput);
 
@@ -108,25 +138,92 @@ namespace NewCalc
                             result = num1 / num2;
                         }
                         else
-                        throw new DivideByZeroException();
+                            throw new DivideByZeroException();
                         break;
                 }
 
-                txtDisplay.Text = result.ToString();
-                txtPreview.Text = $"{num1} {currentOperator} {num2} =";
+                previousInput = result.ToString("N0");
+                txtPreview.Text = $"{result} {currentOperator}";
+                txtDisplay.Clear();
+                currentInput = "";
+            }
+            catch (DivideByZeroException ex)
+            {
+                ClearAll();
+                txtDisplay.Text = "Syntax Error";
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ClearAll();
+                txtDisplay.Text = "Syntax Error";
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void FormatAndDisplayInput()
+        {
+            if (currentInput.Contains("."))
+            {
+                string[] parts = currentInput.Split('.');
+                string formattedIntegerPart = string.Format("{0:N0}", decimal.Parse(parts[0]));
+                txtDisplay.Text = formattedIntegerPart + "." + (parts.Length > 1 ? parts[1] : "");
+            }
+            else
+            {
+                txtDisplay.Text = string.Format("{0:N0}", decimal.Parse(currentInput));
+            }
+        }
+        #endregion
+
+        #region Buttons
+        private void btnequals_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double num1 = double.Parse(previousInput);
+                double num2 = double.Parse(currentInput);
+
+                switch (currentOperator)
+                {
+                    case "+":
+                        result = num1 + num2;
+                        break;
+                    case "-":
+                        result = num1 - num2;
+                        break;
+                    case "×":
+                        result = num1 * num2;
+                        break;
+                    case "÷":
+                        if (num2 != 0)
+                        {
+                            result = num1 / num2;
+                        }
+                        else
+                            throw new DivideByZeroException();
+                        break;
+                }
+
+                txtDisplay.Text = result.ToString("#,##0.##########");
+                string formattedNum1 = num1.ToString("#,##0.##########");
+                string formattedNum2 = num2.ToString("#,##0.##########");
+                txtPreview.Text = $"{formattedNum1} {currentOperator} {formattedNum2} =";
                 previousInput = result.ToString();
+                operatorClicked = false;
                 isResultDisplayed = true;
 
             }
             catch (DivideByZeroException ex)
             {
                 ClearAll();
-                txtDisplay.Text = ex.Message;
+                txtDisplay.Text = "Syntax error";
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 ClearAll();
-                txtDisplay.Text = ex.Message;
+                txtDisplay.Text = "Syntax error";
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -137,10 +234,35 @@ namespace NewCalc
 
         private void btndelete_Click(object sender, EventArgs e)
         {
-            if (currentInput.Length > 0)
+            if (isResultDisplayed && previousInput.Length > 0) 
+            {
+                previousInput = previousInput.Substring(0, previousInput.Length - 1);
+
+                if (string.IsNullOrEmpty(previousInput))
+                    txtDisplay.Text = "0";
+                else
+                {
+                    if (previousInput.Contains("."))
+                    {
+                        string[] parts = previousInput.Split('.');
+                        string formattedIntegerPart = string.Format("{0:N0}", decimal.Parse(parts[0]));
+                        txtDisplay.Text = formattedIntegerPart + "." + (parts.Length > 1 ? parts[1] : "");
+                    }
+                    else
+                    {
+                        txtDisplay.Text = string.Format("{0:N0}", decimal.Parse(previousInput));
+                    }
+                }
+            }
+            else if (currentInput.Length > 0)
             {
                 currentInput = currentInput.Substring(0, currentInput.Length - 1);
                 txtDisplay.Text = currentInput;
+
+                if (string.IsNullOrEmpty(currentInput))
+                    txtDisplay.Text = "0";
+                else
+                    FormatAndDisplayInput();
             }
         }
 
@@ -148,8 +270,11 @@ namespace NewCalc
         {
             if (!currentInput.Contains("."))
             {
-                currentInput += ".";
-                txtDisplay.Text = currentInput;
+                if (string.IsNullOrEmpty(currentInput))
+                    currentInput = "0.";
+                else
+                    currentInput += "."; 
+                FormatAndDisplayInput();
             }
         }
 
@@ -157,7 +282,7 @@ namespace NewCalc
         {
             try
             {
-                decimal newInput = decimal.Parse(currentInput);
+                double newInput = double.Parse(currentInput);
 
                 if (newInput > 0)
                 {
@@ -172,17 +297,18 @@ namespace NewCalc
                     currentInput = txtDisplay.Text;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ClearAll();
                 txtDisplay.Text = "Syntax error";
+                MessageBox.Show(ex.Message);
             }
         }
-
+        #endregion
         private void Calculator_Load(object sender, EventArgs e)
         {
-            txtDisplay.SelectionLength = 0;
             txtDisplay.DeselectAll();
+            txtPreview.DeselectAll();
         }
     }
 }
