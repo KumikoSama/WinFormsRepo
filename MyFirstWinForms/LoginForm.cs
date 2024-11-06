@@ -50,7 +50,7 @@ namespace MyFirstWinForms
             usericon.Image = Properties.Resources.user_solid;
             lockicon.Image = Properties.Resources.lock_solid;
             lbluser.ForeColor = Color.Black;
-            lblpass.ForeColor = Color.Black;
+            lblpass.ForeColor = Color.Black; 
         }
 
         private void togglebtn_Click(object sender, EventArgs e)

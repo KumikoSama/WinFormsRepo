@@ -1,4 +1,4 @@
-namespace Dashboard
+namespace TestConnection
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace Dashboard
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FrontPage());
+            Application.Run(new Form1());
         }
     }
 }
