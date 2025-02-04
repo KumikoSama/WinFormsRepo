@@ -24,9 +24,13 @@ namespace MyFirstWinForms
             string birthdaySet = dateTime.ToString("MMMM dd, yyyy");
 
             if (rbtnfemale.Checked)
+            {
                 gender = "Female";
+            }
             else if (rbtnmale.Checked)
+            {
                 gender = "Male";
+            }
 
             if (!string.IsNullOrWhiteSpace(txtbxfname.Text) && !string.IsNullOrWhiteSpace(txtbxlname.Text) && !string.IsNullOrWhiteSpace(txtbxsetuser.Text) && !string.IsNullOrWhiteSpace(txtbxsetpass.Text) && rbtnfemale.Checked || rbtnmale.Checked)
             {

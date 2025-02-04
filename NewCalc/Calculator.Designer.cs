@@ -61,7 +61,7 @@
             txtDisplay.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtDisplay.ForeColor = Color.DimGray;
             txtDisplay.Location = new Point(28, 53);
-            txtDisplay.MaxLength = 13;
+            txtDisplay.MaxLength = 14;
             txtDisplay.Name = "txtDisplay";
             txtDisplay.PlaceholderText = "0";
             txtDisplay.ReadOnly = true;
@@ -195,7 +195,7 @@
             btnclear.TabIndex = 29;
             btnclear.Text = "C";
             btnclear.UseVisualStyleBackColor = false;
-            btnclear.Click += btnclear_Click;
+            btnclear.Click += btnclear_Click_1;
             // 
             // btn0
             // 
@@ -418,6 +418,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Calculator";
             Text = "Calculator";
+            Load += Calculator_Load;
             ResumeLayout(false);
             PerformLayout();
         }

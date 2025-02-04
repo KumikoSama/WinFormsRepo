@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+
 namespace NewCalc
 #pragma warning disable
 {
@@ -14,14 +15,16 @@ namespace NewCalc
         public Calculator()
         {
             InitializeComponent();
-        } 
+        }
         private void btnNum_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             if (button != null)
             {
-                 if (isResultDisplayed)
+                if (isResultDisplayed)
+                {
                     ClearAll();
+                }
 
                 string buttonText = button.Text;
                 AppendToInput(buttonText);
@@ -36,8 +39,8 @@ namespace NewCalc
                 SetOperator(buttonText);
             }
         }
-
         #region Methods
+
         private void SetOperator(string operatorSymbol)
         {
             if (!string.IsNullOrEmpty(previousInput) && !string.IsNullOrEmpty(currentInput) && !string.IsNullOrEmpty(currentOperator) && !isResultDisplayed)
@@ -51,14 +54,13 @@ namespace NewCalc
                 currentInput = "";
                 currentOperator = operatorSymbol;
                 txtPreview.Text = previousInput + currentOperator;
-                txtDisplay.Text = "";
                 isResultDisplayed = false;
             }
             else if (operatorClicked)
             {
-                FormattedPreviousInput();
+                if (double.TryParse(previousInput, out double number))
+                    previousInput = string.Format("{0:N0}", number);
 
-                txtDisplay.Text = "0";
                 currentOperator = operatorSymbol;
                 txtPreview.Text = previousInput + currentOperator;
             }
@@ -70,8 +72,13 @@ namespace NewCalc
                 txtDisplay.Clear();
                 txtDisplay.Text = "0";
 
-                FormattedPreviousInput();
-                txtDisplay.Text = "0";
+                if (double.TryParse(previousInput, out double number))
+                {
+                    if (previousInput.Contains("."))
+                        previousInput = string.Format("{0:N}", number);
+                    else
+                        previousInput = string.Format("{0:N0}", number);
+                }
                 txtPreview.Text = previousInput + currentOperator;
             }
 
@@ -80,7 +87,7 @@ namespace NewCalc
 
         private void AppendToInput(string value)
         {
-            if (currentInput.Length > 13)
+            if (currentInput.Length > 14)
                 return;
 
             if (operatorClicked)
@@ -91,7 +98,7 @@ namespace NewCalc
             else
                 currentInput += value;
 
-            FormattedCurrentInput();
+            FormatAndDisplayInput();
         }
 
         private void ClearAll()
@@ -152,28 +159,16 @@ namespace NewCalc
                 MessageBox.Show(ex.Message);
             }
         }
-        private void FormattedCurrentInput()
+        private void FormatAndDisplayInput()
         {
             if (currentInput.Contains("."))
             {
-                string[] parts = currentInput.Split('.');
-                string formattedInput = string.Format("{0:N0}", decimal.Parse(parts[0]));
-                txtDisplay.Text = formattedInput + "." + (parts.Length > 1 ? parts[1] : ""); 
+                string[] parts = currentInput.Split('.'); //separates the whole num to the decimals
+                string formattedIntegerPart = string.Format("{0:N0}", decimal.Parse(parts[0])); //[0] is the part w the whole num
+                txtDisplay.Text = formattedIntegerPart + "." + (parts.Length > 1 ? parts[1] : ""); 
             }
             else
                 txtDisplay.Text = string.Format("{0:N0}", decimal.Parse(currentInput));
-        }
-
-        private void FormattedPreviousInput()
-        {
-            if (previousInput.Contains("."))
-            {
-                string[] parts = previousInput.Split('.');
-                string formattedPrevInput = string.Format("{0:N0}", decimal.Parse(parts[0]));
-                previousInput = formattedPrevInput + "." + (parts.Length > 1 ? parts[1] : "");
-            }
-            else
-                previousInput = string.Format("{0:N0}", decimal.Parse(previousInput));
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -182,79 +177,78 @@ namespace NewCalc
             {
                 case Keys.D0:
                 case Keys.NumPad0:
-                    btnNum_Click(btn0, EventArgs.Empty); 
+                    btnNum_Click(btn0, EventArgs.Empty); // Simulate click on the "0" button
                     break;
                 case Keys.D1:
                 case Keys.NumPad1:
-                    btnNum_Click(btn1, EventArgs.Empty); 
+                    btnNum_Click(btn1, EventArgs.Empty); // Simulate click on the "1" button
                     break;
                 case Keys.D2:
                 case Keys.NumPad2:
-                    btnNum_Click(btn2, EventArgs.Empty);
+                    btnNum_Click(btn2, EventArgs.Empty); // Simulate click on the "2" button
                     break;
                 case Keys.D3:
                 case Keys.NumPad3:
-                    btnNum_Click(btn3, EventArgs.Empty); 
+                    btnNum_Click(btn3, EventArgs.Empty); // Simulate click on the "3" button
                     break;
                 case Keys.D4:
                 case Keys.NumPad4:
-                    btnNum_Click(btn4, EventArgs.Empty);
+                    btnNum_Click(btn4, EventArgs.Empty); // Simulate click on the "4" button
                     break;
                 case Keys.D5:
                 case Keys.NumPad5:
-                    btnNum_Click(btn5, EventArgs.Empty);
+                    btnNum_Click(btn5, EventArgs.Empty); // Simulate click on the "5" button
                     break;
                 case Keys.D6:
                 case Keys.NumPad6:
-                    btnNum_Click(btn6, EventArgs.Empty);
+                    btnNum_Click(btn6, EventArgs.Empty); // Simulate click on the "6" button
                     break;
                 case Keys.D7:
                 case Keys.NumPad7:
-                    btnNum_Click(btn7, EventArgs.Empty);
+                    btnNum_Click(btn7, EventArgs.Empty); // Simulate click on the "7" button
                     break;
                 case Keys.D8:
                 case Keys.NumPad8:
-                    btnNum_Click(btn8, EventArgs.Empty);
+                    btnNum_Click(btn8, EventArgs.Empty); // Simulate click on the "8" button
                     break;
                 case Keys.D9:
                 case Keys.NumPad9:
-                    btnNum_Click(btn9, EventArgs.Empty);
+                    btnNum_Click(btn9, EventArgs.Empty); // Simulate click on the "9" button
                     break;
                 case Keys.Oemplus:
                 case Keys.Add:
-                    btnOprtr_Click(btnplus, EventArgs.Empty); 
+                    btnOprtr_Click(btnplus, EventArgs.Empty); // Simulate click on the "+" button
                     break;
                 case Keys.OemMinus:
                 case Keys.Subtract:
-                    btnOprtr_Click(btnminus, EventArgs.Empty); 
+                    btnOprtr_Click(btnminus, EventArgs.Empty); // Simulate click on the "-" button
                     break;
                 case Keys.Multiply:
-                    btnOprtr_Click(btnmultiply, EventArgs.Empty);
+                    btnOprtr_Click(btnmultiply, EventArgs.Empty); // Simulate click on the "*" button
                     break;
                 case Keys.Divide:
-                    btnOprtr_Click(btndivide, EventArgs.Empty); 
+                    btnOprtr_Click(btndivide, EventArgs.Empty); // Simulate click on the "/" button
                     break;
                 case Keys.Decimal:
                 case Keys.OemPeriod:
-                    btndot_Click(btndot, EventArgs.Empty); 
+                    btndot_Click(btndot, EventArgs.Empty); // Simulate click on the "." (decimal) button
                     break;
                 case Keys.Enter:
-                    btnequals_Click(btnequals, EventArgs.Empty); 
+                    btnequals_Click(btnequals, EventArgs.Empty); // Simulate click on the "=" button
                     break;
                 case Keys.Back:
-                    btndelete_Click(btndelete, EventArgs.Empty);
+                    btndelete_Click(btndelete, EventArgs.Empty); // Simulate click on the "Delete" button
                     break;
                 case Keys.Escape:
-                    btnclear_Click(btnclear, EventArgs.Empty); 
-                    break;
-                case Keys.N:
-                    btnneg_Click(btnneg, EventArgs.Empty);
+                    btnclear_Click_1(btnclear, EventArgs.Empty); // Simulate click on the "Clear" button
                     break;
                 default:
-                    return base.ProcessCmdKey(ref msg, keyData);
+                    return base.ProcessCmdKey(ref msg, keyData); // Process other keys normally
             }
-            return true; 
+
+            return true; // Indicate that the key press was handled
         }
+
         #endregion
 
         #region Buttons
@@ -262,12 +256,7 @@ namespace NewCalc
         {
             try
             {
-                if (txtDisplay.Text == "0." || string.IsNullOrEmpty(currentInput) || string.IsNullOrEmpty(previousInput))
-                {
-                    ClearAll();
-                    return;
-                }
-                else
+                if (!string.IsNullOrEmpty(currentInput))
                 {
                     double num1 = double.Parse(previousInput);
                     double num2 = double.Parse(currentInput);
@@ -292,15 +281,17 @@ namespace NewCalc
                                 throw new DivideByZeroException();
                             break;
                     }
+
                     txtDisplay.Text = result.ToString("#,##0.##########");
                     string formattedNum1 = num1.ToString("#,##0.##########");
                     string formattedNum2 = num2.ToString("#,##0.##########");
-
                     txtPreview.Text = $"{formattedNum1} {currentOperator} {formattedNum2} =";
                     previousInput = result.ToString();
                     operatorClicked = false;
                     isResultDisplayed = true;
                 }
+                else
+                    return;
             }
             catch (DivideByZeroException ex)
             {
@@ -316,7 +307,7 @@ namespace NewCalc
             }
         }
 
-        private void btnclear_Click(object sender, EventArgs e)
+        private void btnclear_Click_1(object sender, EventArgs e)
         {
             ClearAll();
         }
@@ -330,7 +321,16 @@ namespace NewCalc
                 if (string.IsNullOrEmpty(previousInput))
                     txtDisplay.Text = "0";
                 else
-                    FormattedPreviousInput();
+                {
+                    if (previousInput.Contains("."))
+                    {
+                        string[] parts = previousInput.Split('.');
+                        string formattedIntegerPart = string.Format("{0:N0}", decimal.Parse(parts[0]));
+                        txtDisplay.Text = formattedIntegerPart + "." + (parts.Length > 1 ? parts[1] : "");
+                    }
+                    else
+                        txtDisplay.Text = string.Format("{0:N0}", decimal.Parse(previousInput));
+                }
             }
             else if (currentInput.Length > 0)
             {
@@ -338,13 +338,9 @@ namespace NewCalc
                 txtDisplay.Text = currentInput;
 
                 if (string.IsNullOrEmpty(currentInput))
-                {
                     txtDisplay.Text = "0";
-                    currentInput = "";
-                    operatorClicked = true;
-                }
                 else
-                    FormattedCurrentInput();
+                    FormatAndDisplayInput();
             }
         }
 
@@ -355,31 +351,41 @@ namespace NewCalc
                 if (string.IsNullOrEmpty(currentInput))
                     currentInput = "0.";
                 else
-                    currentInput += ".";
-                FormattedCurrentInput();
+                    currentInput += "."; 
+                FormatAndDisplayInput();
             }
         }
 
         private void btnneg_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(currentInput) || currentInput.Contains("."))
+            try
             {
                 double newInput = double.Parse(currentInput);
 
                 if (newInput > 0)
                 {
                     newInput = -newInput;
-                    currentInput = newInput.ToString();
+                    txtDisplay.Text = newInput.ToString();
+                    currentInput = txtDisplay.Text;
                 }
                 else if (newInput < 0)
                 {
                     newInput = Math.Abs(newInput);
-                    currentInput = newInput.ToString();
+                    txtDisplay.Text = newInput.ToString();
+                    currentInput = txtDisplay.Text;
                 }
-                FormattedCurrentInput();
             }
-            else return;
+            catch (Exception ex)
+            {
+                ClearAll();
+                txtDisplay.Text = "Syntax error";
+                MessageBox.Show(ex.Message + "");
+            }
         }
         #endregion
+        private void Calculator_Load(object sender, EventArgs e)
+        {
+            txtPreview.DeselectAll();
+        }
     }
 }
